@@ -48,6 +48,7 @@ dependencies = [
  "arrayref",
  "base64",
  "battleship-core",
+ "battleship-methods",
  "bincode",
  "near-sdk",
  "risc0-zkvm-core",
@@ -62,6 +63,14 @@ version = "0.1.0"
 dependencies = [
  "risc0-zkvm-core",
  "serde",
+]
+
+[[package]]
+name = "battleship-methods"
+version = "0.1.0"
+dependencies = [
+ "battleship-core",
+ "risc0-zkvm-guest",
 ]
 
 [[package]]
@@ -591,6 +600,15 @@ dependencies = [
 name = "risc0-zkvm-core"
 version = "0.2.0"
 dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "risc0-zkvm-guest"
+version = "0.1.0"
+dependencies = [
+ "risc0-zkvm-core",
+ "risc0-zkvm-serde",
  "serde",
 ]
 
