@@ -92,8 +92,8 @@ impl Cell {
 
 type Cells = [[Cell; BOARD_SIZE]; BOARD_SIZE];
 
-struct Grid {
-    pub cells: Cells,
+pub struct Grid {
+    cells: Cells
 }
 
 impl Grid {
