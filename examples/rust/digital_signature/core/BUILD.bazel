@@ -8,6 +8,7 @@ risc0_rust_method(
     deps = [
         ":core_guest",
         "//risc0/zkvm/sdk/rust/guest",
+        "@crates_guest//:nalgebra"
     ],
 )
 
@@ -18,6 +19,7 @@ risc0_rust_library_pair(
     guest_deps = [
         "//risc0/zkvm/sdk/rust/core:core_guest",
         "@crates_guest//:serde",
+        "@crates_guest//:nalgebra"
     ],
     host_deps = [
         "//risc0/zkvm/sdk/rust/core:core_host",

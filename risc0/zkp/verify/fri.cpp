@@ -118,12 +118,14 @@ void friVerify(ReadIOP& iop, size_t deg, InnerVerify inner) {
   size_t domain = deg * kInvRate;
   size_t origDomain = domain;
   std::vector<VerifyRoundInfo> rounds;
+
   // Prep the folding verfiers
   while (deg > kFriMinDegree) {
     rounds.emplace_back(iop, domain);
     domain /= kFriFold;
     deg /= kFriFold;
   }
+  
   // Grab the final coeffs + commit
   std::vector<Fp> finalCoeffs(deg * 4);
   iop.read(finalCoeffs.data(), finalCoeffs.size());

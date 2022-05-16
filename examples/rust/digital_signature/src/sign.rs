@@ -41,9 +41,12 @@ fn main() {
     let msg_str = matches.value_of("msg").unwrap();
     let pass_str = matches.value_of("pass").unwrap();
 
+    log::info!("hello");
+
     let signing_receipt = sign(&pass_str, &msg_str).unwrap();
     signing_receipt.verify().unwrap();
 
     log::info!("msg: {:?}", &msg_str);
-    log::info!("commit: {:?}", &signing_receipt.get_commit().unwrap());
+    // log::info!("receipt: {:?}", &signing_receipt);
+    // log::info!("commit: {:?}", &signing_receipt.get_commit().unwrap());
 }

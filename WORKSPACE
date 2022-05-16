@@ -154,6 +154,7 @@ crates_repository(
     name = "crates_guest",
     lockfile = "//:Cargo-guest.Bazel.lock",
     packages = {
+        "bytemuck": crate.spec(version = "1.9.1"),
         "serde": crate.spec(
             default_features = False,
             features = [
@@ -162,6 +163,11 @@ crates_repository(
             ],
             version = "1.0",
         ),
+        "nalgebra": crate.spec(
+            default_features=False,
+            version="0.31.0",
+            features=["serde-serialize"]
+        )
     },
     quiet = False,
 )
