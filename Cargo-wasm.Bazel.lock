@@ -249,6 +249,39 @@
       },
       "license": "MIT/Apache-2.0"
     },
+    "bytemuck 1.9.1": {
+      "name": "bytemuck",
+      "version": "1.9.1",
+      "repository": {
+        "Http": {
+          "url": "https://crates.io/api/v1/crates/bytemuck/1.9.1/download",
+          "sha256": "cdead85bdec19c194affaeeb670c0e41fe23de31459efd1c174d049269cf02cc"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "bytemuck",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "include": [
+                "**/*.rs"
+              ],
+              "exclude": []
+            }
+          }
+        }
+      ],
+      "library_target_name": "bytemuck",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "edition": "2018",
+        "version": "1.9.1"
+      },
+      "license": "Zlib OR Apache-2.0 OR MIT"
+    },
     "cfg-if 1.0.0": {
       "name": "cfg-if",
       "version": "1.0.0",
@@ -353,6 +386,10 @@
         ],
         "deps": {
           "common": [
+            {
+              "id": "bytemuck 1.9.1",
+              "target": "bytemuck"
+            },
             {
               "id": "gloo 0.7.0",
               "target": "gloo"

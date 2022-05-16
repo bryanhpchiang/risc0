@@ -18,7 +18,7 @@ use core::slice;
 use risc0_zkp_core::{
     fp::Fp,
     fp4::Fp4,
-    sha::{Digest, DIGEST_WORDS},
+    sha::{Digest, Sha, DIGEST_WORDS},
 };
 use risc0_zkp_verify::{
     read_iop::ReadIOP,
@@ -72,14 +72,14 @@ impl TryFrom<&[u8]> for MethodID {
     }
 }
 
-pub struct Risc0Circuit {
+pub struct Risc0Circuit<'a> {
     po2: u32,
     globals: Vec<Fp>,
-    code_id: MethodID,
+    code_id: &'a MethodID,
 }
 
-impl Risc0Circuit {
-    pub fn new(code_id: MethodID) -> Self {
+impl<'a> Risc0Circuit<'a> {
+    pub fn new(code_id: &'a MethodID) -> Self {
         Risc0Circuit {
             po2: 0,
             globals: vec![],
@@ -110,12 +110,12 @@ impl MixState {
     }
 }
 
-impl Circuit for Risc0Circuit {
+impl<'a> Circuit for Risc0Circuit<'a> {
     fn taps(&self) -> &'static Taps<'static> {
         return RISCV_TAPS;
     }
 
-    fn execute(&mut self, iop: &mut ReadIOP) {
+    fn execute<S: Sha>(&mut self, iop: &mut ReadIOP<S>) {
         for _ in 0..OUTPUT_REGS {
             let mut reg: u32 = 0;
             iop.read_u32s(slice::from_mut(&mut reg));
@@ -125,7 +125,7 @@ impl Circuit for Risc0Circuit {
         iop.read_u32s(slice::from_mut(&mut self.po2));
     }
 
-    fn accumulate(&mut self, iop: &mut ReadIOP) {
+    fn accumulate<S: Sha>(&mut self, iop: &mut ReadIOP<S>) {
         for _ in 0..ACCUM_MIX_SIZE {
             self.globals.push(Fp::random(iop));
         }
